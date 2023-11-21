@@ -1,0 +1,70 @@
+{
+    "participant": {
+        "ID": "BCG14703",
+        "Gender": "Male",
+        "Sexual_orientation": "Heterosexual",
+        "Digital_performance": "5",
+        "Langue": "English",
+        "Country": "France",
+        "Sex": "Male",
+        "Age": 60
+    },
+    "test": {
+        "name": "Cookie Theft Picture",
+        "interventions": [
+            {
+                "start": "00:00:05",
+                "end": "00:00:15",
+                "contenu": "I see a small uhummm kitchen with a table in the center."
+            },
+            {
+                "start": "00:00:20",
+                "end": "00:00:30",
+                "contenu": "There is a child standing on a uhummm stool, trying to reach for cookies on the table."
+            },
+            {
+                "start": "00:00:35",
+                "end": "00:00:50",
+                "contenu": "A woman is standing near... the sink, washing dishes, and she seems not to notice the child."
+            },
+            {
+                "start": "00:00:55",
+                "end": "00:01:05",
+                "contenu": "The image gives me a feeling ... of chaos and disorder in the kitchen."
+            }
+        ],
+        "total_speech_time": "00:01:05"
+    },
+    "free_questions": [
+        {
+            "question": "Have you recently experienced memory loss affecting your usual abilities?",
+            "answer": "Yes, I have noticed that I sometimes forget where I put my keys or glasses.",
+            "start": "00:01:10",
+            "end": "00:01:30"
+        },
+        {
+            "question": "Do you have difficulty performing familiar tasks?",
+            "answer": "Yes, I sometimes lose track of what I'm doing along the way.",
+            "start": "00:01:35",
+            "end": "00:02:00"
+        },
+        {
+            "question": "Have you observed any language difficulties?",
+            "answer": "Sometimes, I stumble over words or can't find the words I want to say.",
+            "start": "00:02:05",
+            "end": "00:02:20"
+        },
+        {
+            "question": "Have you ever felt disoriented in space or time?",
+            "answer": "Yes, I have sometimes not known what day it was or gotten lost in a familiar neighborhood.",
+            "start": "00:02:25",
+            "end": "00:02:40"
+        },
+        {
+            "question": "Have you noticed weakened judgment in your recent decisions?",
+            "answer": "I think that sometimes I make impulsive decisions without really thinking them through.",
+            "start": "00:02:45",
+            "end": "00:03:00"
+        }
+    ]
+}

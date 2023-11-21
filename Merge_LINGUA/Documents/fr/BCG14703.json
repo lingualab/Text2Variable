@@ -1,0 +1,70 @@
+{
+    "participant": {
+        "ID": "BCG14703",
+        "Genre": "Homme",
+        "Orientation_sexuelle": "Heterosexuel",
+        "Performance_numerique": "5",
+        "Langue": "Francais",
+        "Pays": "France",
+        "sexe": "Homme",
+        "age": 60
+    },
+    "test": {
+        "nom": "Cookie Theft Picture",
+        "interventions": [
+            {
+                "debut": "00:00:05",
+                "fin": "00:00:15",
+                "contenu": "Je vois une petite cuisine avec une table au centre."
+            },
+            {
+                "debut": "00:00:20",
+                "fin": "00:00:30",
+                "contenu": "Il y a un enfant debout sur un tabouret, essayant d'atteindre des cookies sur la table."
+            },
+            {
+                "debut": "00:00:35",
+                "fin": "00:00:50",
+                "contenu": "Une femme se tient pr\u00e8s de l'\u00e9vier, lavant la vaisselle, et elle semble ne pas remarquer l'enfant."
+            },
+            {
+                "debut": "00:00:55",
+                "fin": "00:01:05",
+                "contenu": "L'image me donne une sensation de chaos et de d\u00e9sordre dans la cuisine."
+            }
+        ],
+        "temps_total_de_parole": "00:01:05"
+    },
+    "questions_libres": [
+        {
+            "question": "Avez-vous r\u00e9cemment \u00e9prouv\u00e9 une perte de m\u00e9moire affectant vos habilet\u00e9s usuelles ?",
+            "reponse": "Oui, j'ai remarqu\u00e9 que j'oublie parfois o\u00f9 j'ai mis mes cl\u00e9s ou mes lunettes.",
+            "debut": "00:01:10",
+            "fin": "00:01:30"
+        },
+        {
+            "question": "Avez-vous des difficult\u00e9s \u00e0 ex\u00e9cuter des t\u00e2ches famili\u00e8res ?",
+            "reponse": "Oui, il m'arrive de perdre le fil de ce que je fais en cours de route.",
+            "debut": "00:01:35",
+            "fin": "00:02:00"
+        },
+        {
+            "question": "Avez-vous constat\u00e9 des troubles du langage ?",
+            "reponse": "Parfois, je bafouille ou je ne trouve pas les mots que je veux dire.",
+            "debut": "00:02:05",
+            "fin": "00:02:20"
+        },
+        {
+            "question": "Vous \u00eates-vous d\u00e9j\u00e0 senti d\u00e9sorient\u00e9 dans l'espace ou dans le temps ?",
+            "reponse": "Oui, il m'est arriv\u00e9 de ne pas savoir quel jour il \u00e9tait ou de me perdre dans un quartier familier.",
+            "debut": "00:02:25",
+            "fin": "00:02:40"
+        },
+        {
+            "question": "Avez-vous remarqu\u00e9 un jugement affaibli dans vos d\u00e9cisions r\u00e9centes ?",
+            "reponse": "Je pense que parfois, je prends des d\u00e9cisions impulsives sans vraiment r\u00e9fl\u00e9chir.",
+            "debut": "00:02:45",
+            "fin": "00:03:00"
+        }
+    ]
+}

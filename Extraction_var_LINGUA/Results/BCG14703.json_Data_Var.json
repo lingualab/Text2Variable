@@ -1,0 +1,74 @@
+{
+    "ID": "BCG14703",
+    "Langue": "English",
+    "SpaCy_Model": "en_core_web_sm",
+    "Nombre_de_lemmes": 29,
+    "Nombre_de_fragments": 8,
+    "Nombre_de_fragments_autre_methode": 0,
+    "Nombre_de_pauses_silencieuses": 0,
+    "Nombre_de_pauses_remplies": 14,
+    "Nombre_de_lemmes_differents": 25,
+    "Nombre_de_repetitions_mots": 8,
+    "Adjectif": {
+        "count": 3,
+        "percentage": 4.411764705882353
+    },
+    "Preposition": {
+        "count": 8,
+        "percentage": 11.76470588235294
+    },
+    "Adverbe": "N/A",
+    "Auxiliaire": {
+        "count": 1,
+        "percentage": 1.4705882352941175
+    },
+    "Conjonction": "N/A",
+    "Conjonction_de_coordination": {
+        "count": 2,
+        "percentage": 2.941176470588235
+    },
+    "Determinant": {
+        "count": 12,
+        "percentage": 17.647058823529413
+    },
+    "Interjection": "N/A",
+    "Nom": {
+        "count": 16,
+        "percentage": 23.52941176470588
+    },
+    "Numeral": "N/A",
+    "Particule": {
+        "count": 3,
+        "percentage": 4.411764705882353
+    },
+    "Pronom": {
+        "count": 4,
+        "percentage": 5.88235294117647
+    },
+    "Nom propre": "N/A",
+    "Ponctuation": {
+        "count": 9,
+        "percentage": 13.23529411764706
+    },
+    "Conjonction_de_subordination": "N/A",
+    "Symbole": "N/A",
+    "Verbe": {
+        "count": 10,
+        "percentage": 14.705882352941178
+    },
+    "Autre": "N/A",
+    "Mots_de_classe_ouverte": 29,
+    "Mots_de_classe_fermee": 24,
+    "Nombre_de_verbes_inflexion": 8,
+    "Nombre_de_gerondifs": 4,
+    "Pronoms/(Noms+Pronoms)": 0.2,
+    "Noms/(Noms+Pronoms)": 0.8,
+    "Noms/(Noms+Verbes)": 0.6153846153846154,
+    "Verbes/(Noms+Verbes)": 0.38461538461538464,
+    "Verbes_avec_inflexions/Total_Verbes": 0.8,
+    "Mots_de_classe_ouverte/Total_Mots": 0.09602649006622517,
+    "Mots_de_classe_fermee/Total_Mots": 0.07947019867549669,
+    "Gerondifs/Total_Verbes": 0.4,
+    "Gerondifs/Total_Mots": 0.013245033112582781,
+    "Brunet_W_indice": 513.6497066113452
+}
