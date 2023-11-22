@@ -3,8 +3,8 @@ from nltk.corpus import words
 import string
 import json
 
-# Téléchargement des listes de mots pour l'anglais et le français
-nltk.download('words')
+# Téléchargement des listes de mots pour l'anglais a faire la premiere fois
+#nltk.download('words')
 
 def charger_mots_francais(chemin_fichier):
     """
@@ -86,6 +86,20 @@ def compteur_fragments(tokens, langue, print_fragments=False):
         return len(fragments)
 
 def compteur_fragment_anciennce_version(texte, langue):
+    """
+    Compte le nombre d'occurrences de fragments spécifiques dans le texte en fonction de la langue.
+
+    Args:
+        texte (str): Le texte dans lequel compter les fragments.
+        langue (str): La langue du texte ('English' ou 'Francais').
+
+    Returns:
+        int: Le nombre d'occurrences de fragments dans le texte. Retourne None si la langue n'est pas reconnue.
+
+    Cette fonction compte le nombre d'occurrences de fragments spécifiques dans un texte en fonction de la langue
+    spécifiée ('English' ou 'Francais'). Elle retourne le nombre total d'occurrences de fragments dans le texte.
+    Si la langue n'est pas reconnue, la fonction retourne None.
+    """
     eventCount = 0
     liste_fragments = ['f', 'n', 'N', 'di', 'wa', 'dr', 'clo', 'di', 'lo', 'b', 'mo', 'wat', 'gon', 'tw', 'wha', 'st', 'rec', 'fff', 'ha', 'i',
                                 'hap', 'gir', 'mirr', 'gra', 'ba', 'sh', 'r', 'fa', 'ben', 'ch', 'ru', 'chil', 'd', 'ap', 's', 'laun']
@@ -107,6 +121,19 @@ def compteur_fragment_anciennce_version(texte, langue):
     return eventCount
 
 def context_fragments(tokens):
+    """
+    Compte le nombre de paires de mots spécifiques dans une liste de tokens.
+
+    Args:
+        tokens (list): Une liste de tokens.
+
+    Returns:
+        int: Le nombre de paires de mots spécifiques trouvées dans la liste de tokens.
+
+    Cette fonction compte le nombre de paires de mots spécifiques dans une liste de tokens en utilisant une liste de
+    paires cibles prédéfinies. Elle retourne le nombre total de paires de mots spécifiques trouvées dans la liste
+    de tokens.
+    """
     words_target = [('the', 'there'), ('dry', 'or'), ('out', 'outside'), ('wash', 'drying'), ('curt', 'the'), ('is', 'spill'), ('wash', 'is'), ('bow', 'Cup'), ('tap', 'taps'),
                    ('spill', 'is'), ('kit', 'the'), ('stand', 'standing'), ('go', 'reaching'), ('dish', 'The'), ('look', 'uh'), ('dry', 'or'), ('watch', 'washing'), ('sleeve', 'sleeveless'),
                    ('cook', 'cookie'), ('a', 'an'), ('day', 'daytime'), ('curt', 'the'), ('look', 'reaching'), ('sister', 'reach'), ('cab', 'the'), ('cook', 'the'), ('stand', 'climbing'), ('her','ask'),

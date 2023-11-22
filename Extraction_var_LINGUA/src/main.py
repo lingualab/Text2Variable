@@ -1,13 +1,40 @@
 from load_models import SpaCyModelLoader
 import argparse
+import numpy as np
 import os
 import json
+import string
 from Importation_JSON import read_json_file
 from Save_JSON import save_json_file
+# Importation des fonctions permettant l'extraction des variables decrivant la mecanique de production de la parole
 from Mecanique_de_production_de_la_parole import compter_lemmes, compteur_fragments, compteur_fragment_anciennce_version
+# Importation des fonctions permettant l'extraction des variables decrivant la fluence
 from Fluence import pauses_remplies, pauses_silencieuses, nombre_repetition_mot
-from Caracteristiques_lexicales import Parts_of_Speech, count_open_closed_class_words, compter_verbes_conjugues, compter_gerondifs, calculer_ratios, count_light_verbs, indice_de_Brunet
-import string
+# Importation des fonctions permettant l'extraction des caractéristiques lexicales
+from Caracteristiques_lexicales import (
+    Parts_of_Speech,
+    count_open_closed_class_words,
+    compter_verbes_conjugues,
+    compter_gerondifs,
+    calculer_ratios,
+    count_light_verbs,
+    indice_de_Brunet,
+    count_deictic_pronouns,
+    ratio_termes_indefinis,
+    calculer_mattr,
+    calculer_nbres_mots_unique,
+    stat_R_Honore
+    
+)
+
+from Caracteristiques_semantiques import (
+    analyse_text,
+    nombre_ICU,
+    calculer_ratio_mots_par_ICU_VRAI,
+    densite_idees
+)
+
+# Importation des fonctions permettant l'extraction des caractéristiques pragmatiques
 from Caracteristiques_pragmatiques import coherence_locale
 
 def main():
@@ -76,7 +103,7 @@ def main():
     nombre_de_fragments = compteur_fragments(texte_token_without_punctuation, langue) # print_fragments=False
     nombre_de_fragments_autre_methode = compteur_fragment_anciennce_version(texte_tokenise, langue)
 
-    print("Coompteur de fragments en contexte non fonctionnel pour le moment")
+    print("Compteur de fragments en contexte non fonctionnel pour le moment")
 
     ######## Mecanique de production de la parole ########
     
@@ -109,36 +136,40 @@ def main():
     print("Compteur de verbes légers non fonctionnel pour le moment")
     
     # Pronoms déictiques*
-    
+    nombre_de_pronoms_deictiques = count_deictic_pronouns(texte_brut, langue, model)
     # Termes indéfinis*
-    
+    ratio_nbre_termes_indefinis, nbre_termes_indefinis = ratio_termes_indefinis(texte_brut, langue, model)
     # Moving Average Type- Token Ratio (MATTR)
-
+    MATTR_10 = calculer_mattr(texte_brut, 10, model)
+    MATTR_25 = calculer_mattr(texte_brut, 25, model)
+    MATTR_40 = calculer_mattr(texte_brut, 40, model)
     # Statistique R de Honoré
-    
+    nbres_mots_unique = calculer_nbres_mots_unique(texte_nettoye)  # Le nombre de mots uniques dans le texte
+    stat_honore = stat_R_Honore(total_des_mots, nombre_lemmes_differents, nbres_mots_unique)
     # Indice W de Brunet
     brunet_w_indice = indice_de_Brunet(total_des_mots, nombre_lemmes_differents)
     
     # Familiarité 
-    
+    print("Familiarité non fonctionnel pour le moment")
     # Imageabilité
-    
+    print("Imageabilité non fonctionnel pour le moment")
     # Concrétude
-
+    print("Concrétude non fonctionnel pour le moment")
     # Fréquence des mots dans le langage courant
-    
+    print("Fréquence des mots dans le langage courant non fonctionnel pour le moment")
     # Valence 
-
+    print("Valence non fonctionnel pour le moment")
+    
     ######## Caractéristiques semantiques ########
     
     # 25 informations de contenu (ICUs)
-    
+    dict_info_contenu_T_or_F = analyse_text(texte_brut, langue)  # Analyse du texte en anglais
     # Nombre total d’ICUs
-    
+    nombre_de_ICU_TRUE = nombre_ICU(dict_info_contenu_T_or_F)
     # Efficacité
-    
+    efficacite_ICU = calculer_ratio_mots_par_ICU_VRAI(total_des_mots, nombre_de_ICU_TRUE)
     # Densité d’idées
-    
+    densite_idees__ = densite_idees(texte_brut, model, tailles_fenetres=[3, 10, 25, 40])
     ######## Caractéristiques syntaxiques ########
     
     # Dépendances syntaxiques universelles*
@@ -147,8 +178,7 @@ def main():
     
     # Enfants gauches et droits*
 
-    # Verbes avec inflexions*
-    # Déla1 réalisé dans les catgeories lexicales
+    # Verbes avec inflexions --> Déjà réalisé dans les catgeories lexicales
     
     # Clauses subordonnées*
     
@@ -186,9 +216,6 @@ def main():
     # Modalisations* (Boschi et al., 2017, Boyé et al., 2014)
     
     # Mots de remplissage*
-    
-    
-    
     
     
     # Ajouter les informations au dictionnaire de sortie
@@ -234,9 +261,35 @@ def main():
         'Mots_de_classe_fermee/Total_Mots' : ratios.get('Mots_de_classe_fermee/Total_Mots', "N/A"),
         'Gerondifs/Total_Verbes' : ratios.get('Gerondifs/Total_Verbes', "N/A"),
         'Gerondifs/Total_Mots' : ratios.get('Gerondifs/Total_Mots', "N/A"),
-        'Brunet_W_indice' : brunet_w_indice
+        'Nombre_de_pronoms_deictiques' : nombre_de_pronoms_deictiques.get("total_deictic_pronouns", "N/A"),
+        'Nombre_de_pronoms_deictiques_spatiaux' : nombre_de_pronoms_deictiques.get("spatial", "N/A"),
+        'Nombre_de_pronoms_deictiques_personnels' : nombre_de_pronoms_deictiques.get("personal", "N/A"),
+        'Nombre_de_pronoms_deictiques_temporels' : nombre_de_pronoms_deictiques.get("temporal", "N/A"),
+        'Nombre_de_termes_indefinis' : nbre_termes_indefinis,
+        'Ratio_termes_indefinis' : ratio_nbre_termes_indefinis,
+        'MATTR_10' : MATTR_10,
+        'MATTR_25' : MATTR_25,
+        'MATTR_40' : MATTR_40,
+        'Nombre_de_mots_uniques' : nbres_mots_unique,
+        'Statistique_R_de_Honore' : stat_honore,
+        'Brunet_W_indice' : brunet_w_indice,
+        'Nombre_ICU_TRUE' : nombre_de_ICU_TRUE,
+        'Efficacite_ICU' : efficacite_ICU
+
         
     }
+    # Convertir les valeurs float32 en float
+    for cle in densite_idees__:
+        if isinstance(densite_idees__[cle], np.float32):
+            densite_idees__[cle] = float(densite_idees__[cle])
+            
+    for cle, valeur in densite_idees__.items():
+        cle_densite = f'Densite_idees_{cle}'
+        output_data[cle_densite] = valeur
+        
+    # Itérez à travers le dictionnaire dict_info_contenu_T_or_F et ajoutez chaque mot comme une clé avec sa valeur TRUE ou FALSE
+    for mot, valeur in dict_info_contenu_T_or_F.items():
+        output_data[mot] = valeur
     
     # Composez le chemin complet du fichier de sortie
     output_path = os.path.join(output_dir, output_name)
@@ -252,6 +305,7 @@ def main():
     with open(output_path + "_Data_Var.json", "w") as json_file:
         json_file.write(output_json)
     
+    print("-" * 80)
     print(f"Le fichier {output_name} a été enregistré dans le dossier {output_dir}. L'extraction des diverses variables est finie.")
 
 
