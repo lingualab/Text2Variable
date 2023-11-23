@@ -34,6 +34,25 @@ from Caracteristiques_semantiques import (
     densite_idees
 )
 
+from Caracteristiques_syntaxiques import (
+    analyze_text_dependencies,
+    add_dependency_info,
+    main_dependency_analysis,
+    analyze_children,
+    verbe_inflection_relatif,
+    analyze_subordinate_clauses,
+    translate_variables_subordinate_close_to_french,
+    calculate_average_sentence_length,
+    count_incomplete_sentences,
+    count_prepositional_sentences,
+    count_verbal_sentences,
+    analyze_nominal_sentences,
+    count_verb_tenses,
+    calculate_clauses_per_sentence,
+    calculate_nouns_with_determiners_proportion,
+    count_coordinated_sentences
+    
+)
 # Importation des fonctions permettant l'extraction des caractéristiques pragmatiques
 from Caracteristiques_pragmatiques import coherence_locale
 
@@ -170,35 +189,40 @@ def main():
     efficacite_ICU = calculer_ratio_mots_par_ICU_VRAI(total_des_mots, nombre_de_ICU_TRUE)
     # Densité d’idées
     densite_idees__ = densite_idees(texte_brut, model, tailles_fenetres=[3, 10, 25, 40])
+    
+    
     ######## Caractéristiques syntaxiques ########
     
     # Dépendances syntaxiques universelles*
-    
+    dependance_absolu, dependance_relative = analyze_text_dependencies(texte_brut, model)
     # Longueur des dépendances syntaxiques
-    
+    len_dep_syntaxique = main_dependency_analysis(texte_brut, model)
     # Enfants gauches et droits*
-
-    # Verbes avec inflexions --> Déjà réalisé dans les catgeories lexicales
-    
+    enfants_droite_gauche = analyze_children(texte_brut, model)
+    # Verbes avec inflexions 
+    verbe_inflexion_relatif = verbe_inflection_relatif(nombre_verbe_inflexion, total_des_mots)
     # Clauses subordonnées*
-    
+    dict_clauses_subordonnees = analyze_subordinate_clauses(texte_brut, model)
+    dict_traduit_clauses_subordonnees = translate_variables_subordinate_close_to_french(dict_clauses_subordonnees)
     # Longueur moyenne des phrases
-    
-    # Phrases incomplètes*
-    
+    longueur_moyenne_phrases = calculate_average_sentence_length(texte_brut, model)
+    # Phrases incomplètes*    
+    nbre_phrases_incompletes = count_incomplete_sentences(texte_brut, model, total_des_mots)
     # Nombre de phrases prépositionnelles* (Boschi et al., 2017)
-    
+    nbre_phrases_prepositionnelles = count_prepositional_sentences(texte_brut, model, total_des_mots)
     # Nombre de phrases verbales*
-    
+    nbre_phrases_verbales = count_verbal_sentences(texte_brut, model, total_des_mots)
     # Longueur et nombre de phrases nominales*
-    
+    phrases_nominales =  analyze_nominal_sentences(texte_brut, model, total_des_mots)
     # Temps de verbes utilisés*
-    
+    temps_verbes = count_verb_tenses(texte_brut, model, total_des_mots)
     # Clauses par phrase
-    
+    nbre_clauses_par_phrase = calculate_clauses_per_sentence(texte_brut, model)
     # Proportion de noms accompagnés de déterminants
-    
+    proportion_noms_determinants = calculate_nouns_with_determiners_proportion(texte_brut, model)
     # Phrases coordonnées* (Boschi et al., 2017)
+    coordonnees_phrases = count_coordinated_sentences(texte_brut, model, langue, total_des_mots)
+    print("Phrases coordonnees : ", coordonnees_phrases)
     
     ######## Caractéristiques pragmatiques ########
     
@@ -226,6 +250,7 @@ def main():
         "Nombre_de_lemmes": nombre_de_lemmes,
         "Nombre_de_fragments": nombre_de_fragments,
         "Nombre_de_fragments_autre_methode": nombre_de_fragments_autre_methode,
+        "Nombre_de_mots": total_des_mots,
         "Nombre_de_pauses_silencieuses": nombre_pauses_silencieuses,
         "Nombre_de_pauses_remplies": nombre_pauses_remplies,
         "Nombre_de_lemmes_differents": nombre_lemmes_differents,
@@ -250,7 +275,6 @@ def main():
         'Autre' : POS_Dict.get("Autre", "N/A"),
         'Mots_de_classe_ouverte' : mot_ouvert,
         'Mots_de_classe_fermee' : mot_ferme,
-        'Nombre_de_verbes_inflexion' : nombre_verbe_inflexion,
         'Nombre_de_gerondifs' : nombre_gerondif,
         'Pronoms/(Noms+Pronoms)' : ratios.get('Pronoms/(Noms+Pronoms)', "N/A"),
         'Noms/(Noms+Pronoms)' : ratios.get('Noms/(Noms+Pronoms)', "N/A"),
@@ -274,10 +298,49 @@ def main():
         'Statistique_R_de_Honore' : stat_honore,
         'Brunet_W_indice' : brunet_w_indice,
         'Nombre_ICU_TRUE' : nombre_de_ICU_TRUE,
-        'Efficacite_ICU' : efficacite_ICU
-
+        'Efficacite_ICU' : efficacite_ICU,
+        'Longueur_moyenne_des_dependances' : len_dep_syntaxique.get("Longueur_moyenne_des_dependances", "N/A"),
+        'Longueur_maximale_des_dependances' : len_dep_syntaxique.get("Longueur_maximale_des_dependances", "N/A"),
+        'Moyenne_enfants_gauches' : enfants_droite_gauche.get("Moyenne_enfants_gauches", "N/A"),
+        'Moyenne_enfants_droits' : enfants_droite_gauche.get("Moyenne_enfants_droits", "N/A"),
+        'Total_enfants_gauches' : enfants_droite_gauche.get("Total_enfants_gauches", "N/A"),
+        'Total_enfants_droits' : enfants_droite_gauche.get("Total_enfants_droits", "N/A"),
+        'Nombre_de_verbes_inflexion' : nombre_verbe_inflexion,
+        'Verbe_inflection_relatif' : verbe_inflexion_relatif,
+        'Sujets_Clausaux_absolu' : dict_traduit_clauses_subordonnees.get("Nombre_absolu", {}).get("Sujets_Clausaux", "N/A"),
+        'Sujets_Clausaux_relatif' : dict_traduit_clauses_subordonnees.get("Frequence_relative", {}).get("Sujets_Clausaux", "N/A"),
+        'Complements_Clausaux_Controles_absolu' : dict_traduit_clauses_subordonnees.get("Nombre_absolu", {}).get("Complements_Clausaux_Controles", "N/A"),
+        'Complements_Clausaux_Controles_relatif' : dict_traduit_clauses_subordonnees.get("Frequence_relative", {}).get("Complements_Clausaux_Controles", "N/A"),
+        'Complements_Clausaux_Non_Controles_absolu' : dict_traduit_clauses_subordonnees.get("Nombre_absolu", {}).get("Complements_Clausaux_Non_Controles", "N/A"),
+        'Complements_Clausaux_Non_Controles_relatif' : dict_traduit_clauses_subordonnees.get("Frequence_relative", {}).get("Complements_Clausaux_Non_Controles", "N/A"),
+        'Modificateurs_Clauses_Adverbiaux_absolu' : dict_traduit_clauses_subordonnees.get("Nombre_absolu", {}).get("Modificateurs_Clauses_Adverbiaux", "N/A"),
+        'Modificateurs_Clauses_Adverbiaux_relatif' : dict_traduit_clauses_subordonnees.get("Frequence_relative", {}).get("Modificateurs_Clauses_Adverbiaux", "N/A"),
+        'Modificateurs_Clauses_Adnominaux_absolu' : dict_traduit_clauses_subordonnees.get("Nombre_absolu", {}).get("Modificateurs_Clauses_Adnominaux", "N/A"),
+        'Modificateurs_Clauses_Adnominaux_relatif' : dict_traduit_clauses_subordonnees.get("Frequence_relative", {}).get("Modificateurs_Clauses_Adnominaux", "N/A"),
+        'Longueur_moyenne_phrases' : longueur_moyenne_phrases,
+        'Nombre_de_phrases_incompletes_absolu' : nbre_phrases_incompletes.get("Nombre_absolu_phrases_incompletes", "N/A"),
+        'Nombre_de_phrases_incompletes_relatif' : nbre_phrases_incompletes.get("Frequence_relative_phrases_incompletes", "N/A"),
+        'Nombre_de_phrases_prepositionnelles_absolu' : nbre_phrases_prepositionnelles.get("Nombre_absolu_phrases_prepositionnelles", "N/A"),
+        'Nombre_de_phrases_prepositionnelles_relatif' : nbre_phrases_prepositionnelles.get("Frequence_relative_phrases_prepositionnelles", "N/A"),        
+        'Nombre_de_phrases_verbales_absolu' : nbre_phrases_verbales.get("Nombre_absolu_phrases_verbales", "N/A"),
+        'Nombre_de_phrases_verbales_relatif' : nbre_phrases_verbales.get("Frequence_relative_phrases_verbales", "N/A"),
+        'Nombre_absolu_phrases_nominales' : phrases_nominales.get("Nombre_absolu_phrases_nominales", "N/A"),
+        'Longueur_moyenne_phrases_nominales' : phrases_nominales.get("Longueur_moyenne_phrases_nominales", "N/A"),
+        'Frequence_relative_phrases_nominales' : phrases_nominales.get("Frequence_relative_phrases_nominales", "N/A"),
+        'Nbre_verb_present_absolu' : temps_verbes.get("Nombre_absolu", {}).get("present", "N/A"),
+        'Nbre_verb_present_relatif' : temps_verbes.get("Frequence_relative", {}).get("present", "N/A"),
+        'Nbre_verb_past_absolu' : temps_verbes.get("Nombre_absolu", {}).get("past", "N/A"),
+        'Nbre_verb_past_relatif' : temps_verbes.get("Frequence_relative", {}).get("past", "N/A"),
+        'Nbre_verb_future_absolu' : temps_verbes.get("Nombre_absolu", {}).get("future", "N/A"),
+        'Nbre_verb_future_relatif' : temps_verbes.get("Frequence_relative", {}).get("future", "N/A"),
+        "Nbre_clauses_par_phrase" : nbre_clauses_par_phrase,
+        "Proportion_noms_determinants" : proportion_noms_determinants,
+        "Nombre_de_phrases_coordonnees" : coordonnees_phrases.get("Nombre_absolu_phrases_coordonnees", "N/A"),
+        "Frequence_relative_phrases_coordonnees" : coordonnees_phrases.get("Frequence_relative_phrases_coordonnees", "N/A")
+        
         
     }
+
     # Convertir les valeurs float32 en float
     for cle in densite_idees__:
         if isinstance(densite_idees__[cle], np.float32):
@@ -290,6 +353,9 @@ def main():
     # Itérez à travers le dictionnaire dict_info_contenu_T_or_F et ajoutez chaque mot comme une clé avec sa valeur TRUE ou FALSE
     for mot, valeur in dict_info_contenu_T_or_F.items():
         output_data[mot] = valeur
+    
+    # Ajouter les informations de dépendance syntaxique
+    output_data = add_dependency_info(output_data, dependance_absolu, dependance_relative)
     
     # Composez le chemin complet du fichier de sortie
     output_path = os.path.join(output_dir, output_name)
