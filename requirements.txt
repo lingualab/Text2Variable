@@ -1,0 +1,9 @@
+twine>=4.0.2
+numpy
+pandas
+spacy
+nltk
+openpyxl
+transformers
+sklearn
+scikit-learn

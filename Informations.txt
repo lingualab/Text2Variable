@@ -1,0 +1,19 @@
+# Premiere utilisation
+
+python3 -m venv venv/Text2Variable_preprocessing
+pip install -U pip
+pip install -r requirements.txt
+
+## Par la suite
+
+source venv/Text2Variable_preprocessing/bin/activate
+pip install -U pip
+pip install -r requirements.txt
+
+## Enregistrer les librairies utilises :
+pip list > bibliothèques.txt
+
+
+Pour lancer le code :
+
+python src/main.py Results/BCG14703.json sm
