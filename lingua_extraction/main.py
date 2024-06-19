@@ -1,4 +1,4 @@
-from load_models import SpaCyModelLoader
+from .load_models import SpaCyModelLoader
 import argparse
 import numpy as np
 import csv
@@ -6,19 +6,19 @@ import pandas as pd
 import os
 import json
 import string
-from Importation_database import read_json_file, lire_base_de_donnees
-from Preprocessing.Nettoyage_du_texte import nettoyer_texte
-from Save_JSON import save_json_file
+from .Importation_database import read_json_file, lire_base_de_donnees
+from .Preprocessing.Nettoyage_du_texte import nettoyer_texte
+from .Save_JSON import save_json_file
 # Importation des fonctions permettant l'extraction des variables decrivant la mecanique de production de la parole
-from Mecanique_de_production_de_la_parole import (
+from .Mecanique_de_production_de_la_parole import (
     compter_lemmes, 
     compteur_fragments, 
     compteur_fragment_anciennce_version,
     context_fragments)
 # Importation des fonctions permettant l'extraction des variables decrivant la fluence
-from Fluence import pauses_remplies, pauses_silencieuses, nombre_repetition_mot
+from .Fluence import pauses_remplies, pauses_silencieuses, nombre_repetition_mot
 # Importation des fonctions permettant l'extraction des caractéristiques lexicales
-from Caracteristiques_lexicales import (
+from .Caracteristiques_lexicales import (
     Parts_of_Speech,
     count_open_closed_class_words,
     compter_verbes_conjugues,
@@ -38,13 +38,13 @@ from Caracteristiques_lexicales import (
     calculer_valence_moyenne,
     calculer_imageabilite_moyenne)
 
-from Caracteristiques_semantiques import (
+from .Caracteristiques_semantiques import (
     analyse_text,
     nombre_ICU,
     calculer_ratio_mots_par_ICU_VRAI,
     densite_idees)
 
-from Caracteristiques_syntaxiques import (
+from .Caracteristiques_syntaxiques import (
     analyze_text_dependencies,
     add_dependency_info,
     main_dependency_analysis,
@@ -63,7 +63,7 @@ from Caracteristiques_syntaxiques import (
     count_coordinated_sentences)
 
 # Importation des fonctions permettant l'extraction des caractéristiques pragmatiques
-from Caracteristiques_pragmatiques import (
+from .Caracteristiques_pragmatiques import (
     calculate_cosine_similarity_between_sentences as coherence_locale,
     count_uncertainty_words,
     count_lexical_access_difficulty_words,

@@ -2,7 +2,7 @@ import nltk
 from nltk.corpus import words
 import string
 import json
-from Database_linguistique import liste_fragments, words_targets
+from .Database_linguistique import liste_fragments, words_targets
 # Téléchargement des listes de mots pour l'anglais a faire la premiere fois
 #nltk.download('words')
 

@@ -1,6 +1,6 @@
 from collections import Counter
 import re
-from Database_linguistique import dictPauses
+from .Database_linguistique import dictPauses
 
 def pauses_silencieuses(texte, langue):
     """

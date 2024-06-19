@@ -1,4 +1,4 @@
-from Database_linguistique import dep_labels_fr, translation_dict, coordination_conjunctions
+from .Database_linguistique import dep_labels_fr, translation_dict, coordination_conjunctions
 
 def get_dependency_counts(text, spacy_model):
     """

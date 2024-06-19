@@ -1,6 +1,6 @@
 import itertools
 import numpy as np
-from Database_linguistique import dictICU_fr, dictICU_en
+from .Database_linguistique import dictICU_fr, dictICU_en
 
 def analyse_text(text, language):
     """

@@ -4,7 +4,7 @@ import numpy as np
 import nltk
 from nltk.corpus import wordnet as wn
 import os
-from Database_linguistique import pos_mapping, deictic_pronouns, termes_indefinis
+from .Database_linguistique import pos_mapping, deictic_pronouns, termes_indefinis
 
 def rename_pos_labels(data):
     """

@@ -24,6 +24,7 @@ setup(
         "pandas>=2.1.3",
         "scikit-learn>=1.3.2",  
         "sense2vec>=2.0.2",  
+        "sentencepiece",
         "sentence-transformers>=2.2.2", 
         "setuptools",  
         "spacy>=3.7.2", 
@@ -40,4 +41,9 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
+    entry_points={
+        "console_scripts": [
+            "text2variable = lingua_extraction.main:main",
+        ]
+    }
 )

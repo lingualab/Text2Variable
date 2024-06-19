@@ -6,7 +6,7 @@ tokenizer = AutoTokenizer.from_pretrained("mrm8488/t5-base-finetuned-emotion")
 model = AutoModelWithLMHead.from_pretrained("mrm8488/t5-base-finetuned-emotion")
 model_path = "cardiffnlp/twitter-xlm-roberta-base-sentiment"
 
-from Database_linguistique import uncertainty_words, formulaic_expressions, expressions, filler_expressions_dict
+from .Database_linguistique import uncertainty_words, formulaic_expressions, expressions, filler_expressions_dict
 
 def calculate_cosine_similarity_between_sentences(text, spacy_model):
     """
