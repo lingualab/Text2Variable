@@ -7,3 +7,5 @@ Documents/CCNA_Participants+Dx.xlsx
 venv
 requi_ancien.txt
 test.py
+__pycache__/
+*.egg-info/
