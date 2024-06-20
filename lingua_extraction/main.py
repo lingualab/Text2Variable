@@ -1,7 +1,7 @@
 from .load_models import SpaCyModelLoader
 import argparse
 import numpy as np
-import pkgutil
+import importlib_resources
 import csv
 import pandas as pd
 import os
@@ -192,6 +192,8 @@ def main():
         ### Creation de nouvelles variables ###
         mots, noms, verbes, adjectifs = analyser_texte(texte_brut, model)
         
+        resources = importlib_resources.files(__name__)
+        print(type(resources), resources)
         # Familiarité 
         # Lire la base de données de familiarité
         base_de_donnees_familiarity_path = pkgutil.get_data(__name__, "Documents/Familiarity_Imageability_Database.xlsx")

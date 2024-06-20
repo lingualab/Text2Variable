@@ -17,6 +17,7 @@ setup(
     include_package_data=True,
     install_requires=[
         "docx2txt>=0.8",
+        "importlib_resources",
         "lexicalrichness>=0.5.1",
         "more-itertools>=10.1.0",
         "nltk>=3.8.1",
