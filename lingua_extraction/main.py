@@ -81,10 +81,11 @@ def main():
     parser = argparse.ArgumentParser(description="Rassemble les interventions et enregistre au format JSON.")
 
     # Ajoutez des arguments pour le fichier d'entrée, le nom du fichier de sortie et le dossier de sortie
-    parser.add_argument("input_name", help="Nom du fichier JSON d'entrée")
+    parser.add_argument("input_name", help="Nom du fichier JSON or TXT d'entrée")
     parser.add_argument("Taille_model_spacy", help="Taille du modèle spacy (sm, md, lg, trf)")
     parser.add_argument("-o", "--output_name", help="Nom du fichier JSON de sortie (optionnel)")
     parser.add_argument("-d", "--output_dir", help="Dossier de sortie (optionnel)")
+    parser.add_argument("-l", "--langue", help="Langue du fichier d'entrée (optionnel)")
     # Analysez les arguments de la ligne de commande
     args = parser.parse_args()
 
@@ -93,17 +94,24 @@ def main():
         print(f"Le fichier d'entrée {args.input_name} n'existe pas.")
         return
 
-    # Lire le fichier JSON d'entrée
-    texte_input = read_json_file(args.input_name)
+    # Lire le fichier d'entrée
+    if args.input_name.endswith("json"):
+        texte_input = read_json_file(args.input_name)
+        if texte_input is None:
+            print("Impossible de lire le fichier d'entrée.")
+            return
 
-    if texte_input is None:
-        print("Impossible de lire le fichier d'entrée.")
-        return
+        # Variables :
+        langue = texte_input.get("Langue", "N/A")
+        ID = texte_input.get("ID", "N/A")
+        texte_brut = texte_input.get("Texte", "N/A")
 
-    # Variables :
-    langue = texte_input.get("Langue", "N/A")
-    ID = texte_input.get("ID", "N/A")
-    texte_brut = texte_input.get("Texte", "N/A")
+    else:
+        with open(args.input_name, "r") as f:
+            texte_brut = "".join(f.read().split("\n"))
+        ID = os.path.basename(args.input_name).split("_")[0]
+        langue = args.langue
+
     
     # Charger le modèle SpaCy  
     ### Petit modele pour les tests (plus rapide)
@@ -122,7 +130,7 @@ def main():
         # Utilise le nom du participant s'il est disponible
         participant_id = ID
         if participant_id != "N/A":
-            output_name = f"{participant_id}.json"
+            output_name = f"{participant_id}_lingua_extraction_metrics.json"
         else:
             print("Le nom du participant est introuvable. Spécifiez un nom de fichier de sortie.")
             return
@@ -134,7 +142,7 @@ def main():
     if args.output_dir is not None:
         output_dir = args.output_dir
     else:
-        output_dir = "Results"  # Dossier de sortie par défaut
+        output_dir = "results"  # Dossier de sortie par défaut
 
 
     ######## Mecanique de production de la parole ########
@@ -463,7 +471,7 @@ def main():
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
-    with open(output_path + "_Data_Var.json", "w") as json_file:
+    with open(output_path, "w") as json_file:
         json_file.write(output_json)
     
     print("-" * 80)
@@ -473,7 +481,7 @@ def main():
     df = pd.DataFrame([output_data])
 
     # Spécifiez le nom du fichier Excel de sortie
-    output_excel_file = output_path + ".xlsx"
+    output_excel_file = output_path.replace(".json", ".xlsx")
 
     # Enregistrez le DataFrame dans un fichier Excel en utilisant openpyxl comme moteur
     df.to_excel(output_excel_file, index=False, engine='openpyxl')
