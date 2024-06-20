@@ -324,7 +324,7 @@ def main():
     # Ajouter les informations au dictionnaire de sortie
     output_data = {
         "ID": participant_id,
-        "Langue": texte_input.get("Langue", "N/A"),
+        "Langue": langue,
         "SpaCy_Model" : nom_du_modele,
         "Nombre_de_lemmes": nombre_de_lemmes,
         "Nombre_de_fragments": nombre_de_fragments,
