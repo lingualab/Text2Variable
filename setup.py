@@ -14,6 +14,7 @@ setup(
     long_description=long_description,  # Utilisation de la description du fichier README.md
     long_description_content_type="text/markdown",  # Indication que le format est Markdown
     packages=find_packages(),
+    include_package_data=True,
     install_requires=[
         "docx2txt>=0.8",
         "lexicalrichness>=0.5.1",

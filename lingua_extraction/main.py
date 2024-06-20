@@ -193,7 +193,9 @@ def main():
         
         # Familiarité 
         # Lire la base de données de familiarité
-        base_de_donnees_familiarity = lire_base_de_donnees('Documents/Familiarity_Imageability_Database.xlsx', 'familiarite')
+        base_de_donnees_familiarity_path = pkgutil.get_data(__name__, "Documents/Familiarity_Imageability_Database.xlsx")
+        print(base_de_donnees_familiarity_path)
+        base_de_donnees_familiarity = lire_base_de_donnees(base_de_donnees_familiarity_path, 'familiarite')
         # Calculer la familiarite moyenne pour chaque catégorie
         familiarite_moyenne_mots = calculer_familiarite_moyenne(mots, base_de_donnees_familiarity)
         familiarite_moyenne_noms = calculer_familiarite_moyenne(noms, base_de_donnees_familiarity)
@@ -202,7 +204,8 @@ def main():
         
         # Imageabilité
         # Lire la base de données de familiarité
-        base_de_donnees_imageability = lire_base_de_donnees('Documents/Familiarity_Imageability_Database.xlsx', 'familiarite')
+        base_de_donnees_imageability_path = pkgutil.get_data(__name__, "Documents/Familiarity_Imageability_Database.xlsx")
+        base_de_donnees_imageability = lire_base_de_donnees(base_de_donnees_imageability_path, 'familiarite')
         # Calculer la familiarite moyenne pour chaque catégorie
         imageabilite_moyenne_mots = calculer_imageabilite_moyenne(mots, base_de_donnees_imageability)
         imageabilite_moyenne_noms = calculer_imageabilite_moyenne(noms, base_de_donnees_imageability)
@@ -211,7 +214,8 @@ def main():
 
         # Concrétude
         # Lire la base de données de concrétude
-        base_de_donnees_concretes = lire_base_de_donnees('Documents/Concreteness_Database.xlsx', 'concreteness')
+        base_de_donnees_concretes_path = pkgutil.get_data(__name__, "Documents/Concreteness_Database.xlsx")
+        base_de_donnees_concretes = lire_base_de_donnees(base_de_donnees_concretes_path, 'concreteness')
         # Calculer la concrétude moyenne pour chaque catégorie
         concretude_moyenne_mots = calculer_concretude_moyenne(mots, base_de_donnees_concretes)
         concretude_moyenne_noms = calculer_concretude_moyenne(noms, base_de_donnees_concretes)
@@ -220,7 +224,8 @@ def main():
 
         # Fréquence des mots dans le langage courant
         # Lire la base de données de fréquence
-        base_de_donnees_freq = lire_base_de_donnees('Documents/Frequency_Database.xlsx', 'frequence')
+        base_de_donnees_freq_path = pkgutil.get_data(__name__, "Documents/Frequency_Database.xlsx")
+        base_de_donnees_freq = lire_base_de_donnees(base_de_donnees_freq_path, 'frequence')
         # Calculer la frequence moyenne pour chaque catégorie
         frequence_mots = calculer_frequence_moyenne(mots, base_de_donnees_freq)
         frequence_noms = calculer_frequence_moyenne(noms, base_de_donnees_freq)
@@ -229,7 +234,8 @@ def main():
 
         # Valence 
         # Lire la base de données de valence
-        base_de_donnees_valence = lire_base_de_donnees('Documents/Valence_Database.xlsx', 'valence')
+        base_de_donnees_valence_path = pkgutil.get_data(__name__, "Documents/Valence_Database.xlsx")
+        base_de_donnees_valence = lire_base_de_donnees(base_de_donnees_valence_path, 'valence')
         # Calculer la valence moyenne pour chaque catégorie
         valence_moyenne_mots = calculer_valence_moyenne(mots, base_de_donnees_valence)
         valence_moyenne_noms = calculer_valence_moyenne(noms, base_de_donnees_valence)
