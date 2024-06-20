@@ -86,6 +86,7 @@ def main():
     parser.add_argument("-o", "--output_name", help="Nom du fichier JSON de sortie (optionnel)")
     parser.add_argument("-d", "--output_dir", help="Dossier de sortie (optionnel)")
     parser.add_argument("-l", "--langue", help="Langue du fichier d'entrée (optionnel)")
+    parser.add_argument("--excel", action='store_true', help="produce excel file is specified")
     # Analysez les arguments de la ligne de commande
     args = parser.parse_args()
 
@@ -477,14 +478,15 @@ def main():
     print("-" * 80)
     print(f"Le fichier {output_name} a été enregistré dans le dossier {output_dir}. L'extraction des diverses variables est finie.")
     
-    # Convertissez le dictionnaire en un DataFrame pandas
-    df = pd.DataFrame([output_data])
+    if args.excel:
+        # Convertissez le dictionnaire en un DataFrame pandas
+        df = pd.DataFrame([output_data])
 
-    # Spécifiez le nom du fichier Excel de sortie
-    output_excel_file = output_path.replace(".json", ".xlsx")
+        # Spécifiez le nom du fichier Excel de sortie
+        output_excel_file = output_path.replace(".json", ".xlsx")
 
-    # Enregistrez le DataFrame dans un fichier Excel en utilisant openpyxl comme moteur
-    df.to_excel(output_excel_file, index=False, engine='openpyxl')
+        # Enregistrez le DataFrame dans un fichier Excel en utilisant openpyxl comme moteur
+        df.to_excel(output_excel_file, index=False, engine='openpyxl')
 
 if __name__ == "__main__":
     main()
