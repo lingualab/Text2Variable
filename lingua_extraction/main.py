@@ -114,6 +114,10 @@ def main():
         ID = args.pid
         langue = args.langue
 
+    # Make "en" and "fr" possible for langue
+    langues = {"en": "English", "fr": "Francais"}
+    if langue in langues.keys():
+        langue = langues[langue]
     
     # Charger le modèle SpaCy  
     ### Petit modele pour les tests (plus rapide)
