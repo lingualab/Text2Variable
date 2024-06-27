@@ -86,6 +86,7 @@ def main():
     parser.add_argument("-o", "--output_name", help="Nom du fichier JSON de sortie (optionnel)")
     parser.add_argument("-d", "--output_dir", help="Dossier de sortie (optionnel)")
     parser.add_argument("-l", "--langue", help="Langue du fichier d'entrée (optionnel)")
+    parser.add_argument("--pid", help="participant_id (optionnel)")
     parser.add_argument("--excel", action='store_true', help="produce excel file is specified")
     # Analysez les arguments de la ligne de commande
     args = parser.parse_args()
@@ -110,7 +111,7 @@ def main():
     else:
         with open(args.input_name, "r") as f:
             texte_brut = "".join(f.read().split("\n"))
-        ID = os.path.basename(args.input_name).split("_")[0]
+        ID = args.pid
         langue = args.langue
 
     
@@ -127,9 +128,9 @@ def main():
     texte_lemmatise = [token.lemma_ for token in doc if not token.is_stop]
     
     # Déterminer le nom du fichier de sortie
+    participant_id = ID
     if args.output_name is None:
         # Utilise le nom du participant s'il est disponible
-        participant_id = ID
         if participant_id != "N/A":
             output_name = f"{participant_id}_lingua_extraction_metrics.json"
         else:
@@ -137,7 +138,7 @@ def main():
             return
     else:
         # Utilisez le nom spécifié en ligne de commande avec l'extension .json
-        output_name = args.output_name + ".json"
+        output_name = args.output_name
 
     # Déterminer le dossier de sortie
     if args.output_dir is not None:
@@ -323,7 +324,7 @@ def main():
     
     # Ajouter les informations au dictionnaire de sortie
     output_data = {
-        "ID": participant_id,
+        "participant_id": participant_id,
         "Langue": langue,
         "SpaCy_Model" : nom_du_modele,
         "Nombre_de_lemmes": nombre_de_lemmes,
