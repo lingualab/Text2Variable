@@ -97,6 +97,7 @@ def main():
         return
 
     # Lire le fichier d'entrée
+    input_basename = ".".join(os.path.basename(args.input_name).split(".")[:-1])
     if args.input_name.endswith("json"):
         texte_input = read_json_file(args.input_name)
         if texte_input is None:
@@ -134,12 +135,7 @@ def main():
     # Déterminer le nom du fichier de sortie
     participant_id = ID
     if args.output_name is None:
-        # Utilise le nom du participant s'il est disponible
-        if participant_id != "N/A":
-            output_name = f"{participant_id}_lingua_extraction_metrics.json"
-        else:
-            print("Le nom du participant est introuvable. Spécifiez un nom de fichier de sortie.")
-            return
+        output_name = f"{input_basename}_lingua_extraction_metrics.json"
     else:
         # Utilisez le nom spécifié en ligne de commande avec l'extension .json
         output_name = args.output_name
@@ -328,6 +324,7 @@ def main():
     
     # Ajouter les informations au dictionnaire de sortie
     output_data = {
+        "filename": input_basename,
         "participant_id": participant_id,
         "Langue": langue,
         "SpaCy_Model" : nom_du_modele,
