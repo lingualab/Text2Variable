@@ -160,12 +160,17 @@ def get_emotion(text):
 
 def get_sentiment(text):
     """
-    Analyse le sentiment d'un texte.
+    Analyse le sentiment d'un texte utilisant le modèle mrm8488/t5-base-finetuned-emotion
     :param text: Texte à analyser.
     :return: Étiquette de sentiment.
     """
     # Création de la pipeline de sentiment analysis
     sentiment_task = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path)
+
+    # model has a token limit of 514
+    if len(text) > 514:
+        text = text[:514]
+
     # Analyse du sentiment
     result = sentiment_task(text)
     # Récupération de l'étiquette de sentiment
