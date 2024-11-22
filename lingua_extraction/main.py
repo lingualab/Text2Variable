@@ -307,8 +307,11 @@ def main():
     incertitude_words = count_uncertainty_words(texte_brut, model, langue, total_des_mots)
     # Difficultés à trouver les bons mots*
     difficulte_acces_lexical = count_lexical_access_difficulty_words(texte_brut, model, langue, total_des_mots)
-    # Valence / sentiment du discours avec Hugging Face
-    sentiment = get_sentiment(texte_brut) # "Positive", "Negative", "Neutral
+    # Valence / sentiment du discours avec Hugging Face and model has a token limit of 514
+    text_sentiment = texte_tokenise
+    if len(text_sentiment) > 514:
+        text_sentiment = text_sentiment[:514]
+    sentiment = get_sentiment(" ".join(text_sentiment)) # "Positive", "Negative", "Neutral
     # Emotion du texte
     emotion = get_emotion(texte_brut)
     # Expressions formulaiques* (Van Lancker Sidtis et al., 2015)

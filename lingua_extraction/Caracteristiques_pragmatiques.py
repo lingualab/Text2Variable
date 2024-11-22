@@ -166,11 +166,6 @@ def get_sentiment(text):
     """
     # Création de la pipeline de sentiment analysis
     sentiment_task = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path)
-
-    # model has a token limit of 514
-    if len(text) > 514:
-        text = text[:514]
-
     # Analyse du sentiment
     result = sentiment_task(text)
     # Récupération de l'étiquette de sentiment
