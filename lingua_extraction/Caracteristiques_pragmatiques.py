@@ -165,7 +165,7 @@ def get_sentiment(text):
     :return: Étiquette de sentiment.
     """
     # Création de la pipeline de sentiment analysis
-    sentiment_task = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path)
+    sentiment_task = pipeline("sentiment-analysis", model=model_path, tokenizer=model_path, max_length=512, truncation=True)
     # Analyse du sentiment
     result = sentiment_task(text)
     # Récupération de l'étiquette de sentiment
