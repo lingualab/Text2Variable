@@ -28,7 +28,7 @@ def calculate_cosine_similarity_between_sentences(text, spacy_model):
 
     average_similarity = total_similarity / comparisons if comparisons else 0
 
-    return average_similarity
+    return float(average_similarity)
 
 def count_uncertainty_words(text, spacy_model, langue_code, total_words):
     """

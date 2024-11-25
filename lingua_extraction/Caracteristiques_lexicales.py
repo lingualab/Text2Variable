@@ -390,7 +390,7 @@ def calculer_frequence_moyenne(mots, base_de_donnees, colonne_frequence='SUBTLWF
     for mot in mots:
         if mot in base_de_donnees['Word'].values:
             somme_frequence += base_de_donnees[base_de_donnees['Word'] == mot][colonne_frequence].iloc[0]
-    return somme_frequence / len(mots) if mots else 0
+    return float(somme_frequence / len(mots)) if mots else 0
 
 def calculer_familiarite_moyenne(mots, base_de_donnees):
     """
@@ -443,7 +443,7 @@ def calculer_concretude_moyenne(mots, base_de_donnees):
             if not pd.isna(valeur_concretude):
                 total_concretude += valeur_concretude
                 compteur += 1
-    return total_concretude / compteur if compteur > 0 else 0
+    return float(total_concretude / compteur) if compteur > 0 else 0
 
 def calculer_valence_moyenne(mots, base_de_donnees):
     """
@@ -467,7 +467,7 @@ def calculer_valence_moyenne(mots, base_de_donnees):
             if not pd.isna(valeur_valence):
                 total_valence += valeur_valence
                 compteur += 1
-    return total_valence / compteur if compteur > 0 else 0
+    return float(total_valence / compteur) if compteur > 0 else 0
 
 def calculer_imageabilite_moyenne(mots, base_de_donnees):
     """
