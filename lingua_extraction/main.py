@@ -176,9 +176,9 @@ def main():
     # Compter les gerondifs
     nombre_gerondif = compter_gerondifs(texte_brut, langue, model)
     # Extraire les valeurs "count" pour Verbe, Nom et Pronom
-    total_verbes = POS_Dict.get("Verbe", {}).get("count", "N/A")
-    total_noms = POS_Dict.get("Nom", {}).get("count", "N/A")
-    total_pronoms = POS_Dict.get("Pronom", {}).get("count", "N/A")
+    total_verbes = POS_Dict.get("Verbe", {}).get("count", 0)
+    total_noms = POS_Dict.get("Nom", {}).get("count", 0)
+    total_pronoms = POS_Dict.get("Pronom", {}).get("count", 0)
     total_des_mots = len(texte_nettoye)
     # Ratio de différentes Parts-of-Speech et types de mots
     ratios = calculer_ratios(total_verbes, total_noms, total_pronoms, nombre_verbe_inflexion, mot_ouvert, mot_ferme, nombre_gerondif, total_des_mots)
