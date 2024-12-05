@@ -86,6 +86,7 @@ def main():
     parser.add_argument("-o", "--output_name", help="Nom du fichier JSON de sortie (optionnel)")
     parser.add_argument("-d", "--output_dir", help="Dossier de sortie (optionnel)")
     parser.add_argument("-l", "--langue", help="Langue du fichier d'entrée (optionnel)")
+    parser.add_argument("-t", "--task", help="description d'image (cookie_theft ou picnic) (optionnel)")
     parser.add_argument("--pid", help="participant_id (optionnel)")
     parser.add_argument("--excel", action='store_true', help="produce excel file is specified")
     # Analysez les arguments de la ligne de commande
@@ -258,7 +259,7 @@ def main():
     ######## Caractéristiques semantiques ########
     
     # 25 informations de contenu (ICUs)
-    dict_info_contenu_T_or_F = analyse_text(texte_brut, langue)  # Analyse du texte en anglais
+    dict_info_contenu_T_or_F = analyse_text(texte_brut, langue, args.task)  # Analyse du texte en anglais
     # Nombre total d’ICUs
     nombre_de_ICU_TRUE = nombre_ICU(dict_info_contenu_T_or_F)
     # Efficacité

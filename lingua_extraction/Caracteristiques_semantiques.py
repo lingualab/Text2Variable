@@ -1,8 +1,19 @@
 import itertools
 import numpy as np
-from .Database_linguistique import dictICU_fr, dictICU_en
+from .Database_linguistique import dictICU_cookie_fr, dictICU_cookie_en, dictICU_picnic_en
 
-def analyse_text(text, language):
+dict_ICUs = {
+    "en": {
+        "cookie_theft": dictICU_cookie_en,
+        "picnic": dictICU_picnic_en,
+    },
+    "fr": {
+        "cookie_theft": dictICU_cookie_fr,
+    }
+}
+dictICU_cookie_fr, dictICU_cookie_en, dictICU_picnic_fr, dictICU_picnic_en
+
+def analyse_text(text, language, task):
     """
     Analyse le texte pour détecter la présence d'ICUs (Informations de Contenu Uniques) associées à des sujets,
     lieux, objets et actions spécifiques. Le code est conçu pour être utilisé dans le contexte de l'image "Cookie Theft".
@@ -10,20 +21,17 @@ def analyse_text(text, language):
     Args:
         text (str): Le texte à analyser.
         language (str): La langue du texte ("Francais" ou "English").
+        task (str): image utilisée pour la production du texte ("cookie_theft" ou "picnic").
 
     Returns:
         dict: Un dictionnaire contenant des informations sur la présence des ICUs. Chaque ICU est associée à une clé
               et la valeur correspondante est True si l'ICU est trouvée dans le texte, sinon False.
     """
+    dictICU = dict_ICUs.get(language, {}).get(task, None)
 
-    if language == "Francais":
-        dictICU = dictICU_fr
-    elif language == "English":
-        dictICU = dictICU_en
-    else:
+    if not dictICU:
         print("Langue non reconnue pour le moment.")
-        return None
-
+        return dict()
 
     # Initialisation du dictionnaire de résultats
     results = {key: False for key in dictICU}

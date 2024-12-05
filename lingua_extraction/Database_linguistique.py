@@ -64,7 +64,7 @@ termes_indefinis = {
 # Database Caractéristiques sémantiques
 
 # Dictionnaires ICU pour les deux langues
-dictICU_fr = {
+dictICU_cookie_fr = {
     'mère': ['mère', 'maman', 'mamie', 'mam', 'mamma', 'momma', 'ma', 'mama', 'femme'],
     'garçon': ['garçon', 'gamin', 'mec', 'gosse', 'fils', 'écolier', 'jeune homme', 'jeune garçon', 'enfant mâle'],
     'fille': ['fille', 'fille', 'jeune fille', 'écolière', 'jeune dame', 'jeune fille', 'enfant femelle'],
@@ -92,7 +92,7 @@ dictICU_fr = {
     'mère ne remarquant pas les enfants': ['inconsciente', 'remarqué', 'pas remarqué', 'pas prendre garde', 'pas dérangée', 'pas dérangé'],
 }
 
-dictICU_en = {'mother': ['mother', 'mom', 'mum', 'mommy', 'mummy', 'mamma', 'momma', 'ma', 'mama', 'woman'], 
+dictICU_cookie_en = {'mother': ['mother', 'mom', 'mum', 'mommy', 'mummy', 'mamma', 'momma', 'ma', 'mama', 'woman'], 
         'boy': ['boy', 'guy', 'dude', 'lad', 'son', 'schoolboy', 'young man', 'son', 'young boy', 'male child'], 
         'girl': ['girl', 'daughter', 'lass', 'schoolgirl', 'young lady', 'young girl', 'female child'],
         'kitchen': ['kitchen'], 
@@ -119,6 +119,47 @@ dictICU_en = {'mother': ['mother', 'mom', 'mum', 'mommy', 'mummy', 'mamma', 'mom
         'mother not noticing children': ['unnoticing', 'noticed', 'not noticed', 'not take notice', 'unbothered', 'not bothered'],
 }
 
+# define Information Content Units (ICU) with the grid from Jensen, Chenery, Copland (2006) J Comm Dis
+dictICU_picnic_en = {'father': ['father', 'husband', 'daddy', 'Dad', 'dad'], 
+           'mother': ['mother', 'wife', 'mom', 'mommy', 'girl'], 
+           'couple': ['couple', 'parents', 'owners'],
+            'child': ['child'], 
+           'boy': ['boy', 'brother'],
+           'fisherman': ['fisherman', 'fisher', 'rod'],
+           'sailors': ['sailors', 'people', 'people sailing'], 
+           'dog': ['dog', 'doggy', 'animal'], 
+           
+           'garage': ['garage'],
+           'water': ['water', 'lake', 'river', 'sea', 'ocean',
+                    'bank', 'edge', 'shore', 'riverside'], 
+           'beach': ['beach', 'sand'], 
+           #'pail': ['pail', 'blanket'], this one is not in Jensen
+           'jetty' : ['jetty', 'wharf', 'dock'],
+           'kite': ['kite'],
+           'book': ['book', 'novel'], 
+            'bucket': ['bucket'], 
+           'spade': ['spade', 'shovel'], 
+           'car': ['car', 'vehicle', 'automobile', 'sedan', 'wagon'], 
+           'boat': ['boat', 'sailboat', 'yacht', 'vessel', 'slinghy', 'sloop'], 
+           'flag': ['flag', 'pole'], 
+           'radio': ['radio', 'transistor'], 
+           'sandals': ['sandals', 'shoes', 'shoe', 'flip', 'flops'],
+           'tree': ['tree' 'oak'], 
+           'basket': ['basket'],
+           'drink': ['drink', 'bottle', 'wine', 'soda', 'beer', 'liquor', 
+                       'coffee', 'tea'],
+            'house': ['house', 'cottage', 'shack', 'cottage'],
+           'reading': ['reading', 'read'], 
+           'fishing': ['fishing', 'fish', 'catch'], 
+           'pouring': ['pouring', 'pour', 'serve'], 
+           'flying': ['flying', 'fly'], #flag
+           'flying' : ['flying', 'fly'], #kite
+           'playing': ['playing', 'play', 'build', 'building'], # child on the beach
+           'playing': ['playing', 'blasting'], # radio
+           'picnicking': ['picnic', 'picnicking'], 
+           'sailing': ['sailing', 'sail', 'boating'], 
+           'parking': ['parking', 'parked', 'park']
+          }
 
 # Database Caractéristiques syntaxiques
 
