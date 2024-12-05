@@ -11,7 +11,6 @@ dict_ICUs = {
         "cookie_theft": dictICU_cookie_fr,
     }
 }
-dictICU_cookie_fr, dictICU_cookie_en, dictICU_picnic_fr, dictICU_picnic_en
 
 def analyse_text(text, language, task):
     """
