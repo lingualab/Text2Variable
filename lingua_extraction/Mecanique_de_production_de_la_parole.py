@@ -2,6 +2,7 @@ import nltk
 from nltk.corpus import words
 import string
 import json
+import importlib_resources
 from .Database_linguistique import liste_fragments, words_targets
 # Téléchargement des listes de mots pour l'anglais a faire la premiere fois
 #nltk.download('words')
@@ -52,9 +53,8 @@ def identification_fragments(tokens, langue):
         mots_valides = set(words.words())
     elif langue == 'Francais':
         # Utilisation de la liste des mots français chargée
-        chemin_fichier = 'French words.json'
-        mots_francais = charger_mots_francais(chemin_fichier)
-        mots_valides = mots_francais
+        resources = importlib_resources.files(__name__) / "Documents"
+        mots_valides = charger_mots_francais(resources / 'french_words.json')
     else:
         print("Langue non reconnue pour le moment.")
         return None
