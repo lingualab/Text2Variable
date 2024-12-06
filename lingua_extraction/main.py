@@ -252,6 +252,26 @@ def main():
 
     elif langue == "Francais":
         print("Les variables de familiarité, d'imageabilité, de concretude, de fréquence et de valence ne sont pas disponibles pour le moment pour le français")
+        familiarite_moyenne_mots = None
+        familiarite_moyenne_noms = None
+        familiarite_moyenne_verbes = None
+        familiarite_moyenne_adjectifs = None
+        imageabilite_moyenne_mots = None
+        imageabilite_moyenne_noms = None
+        imageabilite_moyenne_verbes = None
+        imageabilite_moyenne_adjectifs = None
+        concretude_moyenne_mots = None
+        concretude_moyenne_noms = None
+        concretude_moyenne_verbes = None
+        concretude_moyenne_adjectifs = None
+        frequence_mots = None
+        frequence_noms = None
+        frequence_verbes = None
+        frequence_adjectifs = None
+        valence_moyenne_mots = None
+        valence_moyenne_noms = None
+        valence_moyenne_verbes = None
+        valence_moyenne_adjectifs = None
         
     else:
         raise ValueError("Langue non reconnue pour le moment")
