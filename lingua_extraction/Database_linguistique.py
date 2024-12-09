@@ -21,7 +21,8 @@ words_targets = {
 ## Liste des mots cibles pour identifier des pauses
 dictPauses = {
     'English': {'filled': ['uhm', 'uh', 'uhummm', 'hum', 'hummmm', 'humm', 'mm', 'mmm', 'Mm', 'um', 'hmmm', 'hmm', 'hm', 'eh', 'err']},
-    'Francais': {'filled': ['euh', 'hum', 'heu', 'hm', 'öhm', 'uhm', 'mmh', 'mh']}
+    'Francais': {'filled': ['euh', 'hum', 'heu', 'hm', 'öhm', 'uhm', 'mmh', 'mh']},
+    'UCSF': {'filled': ["um", "er", "uh", "ah", "hmm", "erm", "like", "so", "well"]}
 }
 
 # Database caractéristiques linguistiques

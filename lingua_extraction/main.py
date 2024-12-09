@@ -1,5 +1,6 @@
 from .load_models import SpaCyModelLoader
 import argparse
+from collections import Counter
 import numpy as np
 import importlib_resources
 import csv
@@ -121,6 +122,19 @@ def main():
     if langue in langues.keys():
         langue = langues[langue]
     
+    # Disfluency metrics from UCSF
+    disfluency_counter = Counter(texte_brut)
+    disfluency_ucsf_metrics = {
+        "UCSF_disfluency_single_repetition": disfluency_counter["="],
+        "UCSF_disfluency_multiple_repetitions": disfluency_counter["@"],
+        "UCSF_disfluency_repeated_phrase": disfluency_counter["&"],
+        "UCSF_disfluency_restart_rephrase": disfluency_counter["#"],
+        "UCSF_disfluency_partial_word_false_start": disfluency_counter["%"],
+        "UCSF_disfluency_spoonerism": disfluency_counter["$"],
+    }
+    for char in "=@&#%$":
+        texte_brut = texte_brut.replace(char, "")
+
     # Charger le modèle SpaCy  
     ### Petit modele pour les tests (plus rapide)
     loader = SpaCyModelLoader()
@@ -163,6 +177,7 @@ def main():
     nombre_pauses_silencieuses = pauses_silencieuses(texte_brut, langue)
     # Compter le nombre de pauses remplies dans le texte brut
     nombre_pauses_remplies = pauses_remplies(texte_brut, langue)
+    disfluency_ucsf_metrics["UCSF_disfluency_filled_pauses"] = pauses_remplies(texte_brut, "UCSF")
     # Compter le nombre de répétitions de mots dans le texte lemmatize
     nombre_lemmes_differents, nombre_repetitions = nombre_repetition_mot(texte_lemmatise)
 
@@ -456,6 +471,7 @@ def main():
         "Nombre_de_mots_de_remplissage" : mots_de_remplissage.get("Nombre_absolu", "N/A"),
         "Frequence_relative_mots_de_remplissage" : mots_de_remplissage.get("Frequence_relative", "N/A")
     }
+    output_date.update(disfluency_ucsf_metrics)
     
     
     for key, value in POS_Dict.items():
