@@ -471,7 +471,7 @@ def main():
         "Nombre_de_mots_de_remplissage" : mots_de_remplissage.get("Nombre_absolu", "N/A"),
         "Frequence_relative_mots_de_remplissage" : mots_de_remplissage.get("Frequence_relative", "N/A")
     }
-    output_date.update(disfluency_ucsf_metrics)
+    output_data.update(disfluency_ucsf_metrics)
     
     
     for key, value in POS_Dict.items():
