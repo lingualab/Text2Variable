@@ -23,20 +23,21 @@ def pauses_silencieuses(texte, langue):
     
     return texte.count(key_word)
 
-def pauses_remplies(texte, langue):
+def pauses_remplies(texte, langue, kind="filled"):
     """
     Compte le nombre total d'occurrences des mots spécifiés dans le texte, selon la langue.
 
     Args:
     texte (str): Le texte à analyser.
     langue (str): La langue du texte ('English' ou 'Francais').
+    kind (str): kind of pauses ('filled' ou 'silent').
 
     Returns:
     int: Le nombre d'occurrences des pauses remplies ou -1 si la langue n'est pas prise en charge.
     """
 
     if langue in dictPauses:
-        filled_pauses = dictPauses[langue]['filled']
+        filled_pauses = dictPauses[langue].get(kind, list())
         count = sum(texte.count(pause) for pause in filled_pauses)
         return count
     else:

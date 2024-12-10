@@ -178,6 +178,7 @@ def main():
     # Compter le nombre de pauses remplies dans le texte brut
     nombre_pauses_remplies = pauses_remplies(texte_brut, langue)
     disfluency_ucsf_metrics["UCSF_disfluency_filled_pauses"] = pauses_remplies(texte_brut, "UCSF")
+    disfluency_ucsf_metrics["UCSF_disfluency_silent_pauses"] = pauses_remplies(texte_brut, "UCSF", "silent")
     # Compter le nombre de répétitions de mots dans le texte lemmatize
     nombre_lemmes_differents, nombre_repetitions = nombre_repetition_mot(texte_lemmatise)
 
