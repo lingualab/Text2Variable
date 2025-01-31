@@ -3,11 +3,11 @@ import numpy as np
 from .Database_linguistique import dictICU_cookie_fr, dictICU_cookie_en, dictICU_picnic_en
 
 dict_ICUs = {
-    "en": {
+    "English": {
         "cookie_theft": dictICU_cookie_en,
         "picnic": dictICU_picnic_en,
     },
-    "fr": {
+    "Francais": {
         "cookie_theft": dictICU_cookie_fr,
     }
 }

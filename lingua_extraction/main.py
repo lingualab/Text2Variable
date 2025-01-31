@@ -496,7 +496,7 @@ def main():
         
     # Itérez à travers le dictionnaire dict_info_contenu_T_or_F et ajoutez chaque mot comme une clé avec sa valeur TRUE ou FALSE
     for mot, valeur in dict_info_contenu_T_or_F.items():
-        output_data[mot] = valeur
+        output_data["ICU " + mot] = valeur
     
     # Ajouter les informations de dépendance syntaxique
     output_data = add_dependency_info(output_data, dependance_absolu, dependance_relative)
