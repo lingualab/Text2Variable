@@ -1,4 +1,9 @@
-# Bibliothèque Python 
+# Repository Deprecated
+
+This repository is no longer maintained.  
+Development continues in the new repository:
+
+**[https://github.com/lingualab/speechmetryflow](https://github.com/lingualab/speechmetryflow/tree/main/src/speechmetryflow)**
 
 ## Description
 
